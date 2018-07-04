@@ -40,7 +40,7 @@ public class Main {
         }
     }
     
-    public static void printChanges(SVNLogEntry logEntry, SVNRepository repository) throws Exception{
+    public static void printChanges(SVNLogEntry logEntry, SVNRepository repository, String packageFolderName) throws Exception{
             System.out.println( "---------------------------------------------" );
             System.out.println ("revision: " + logEntry.getRevision( ) );
 
@@ -52,7 +52,7 @@ public class Main {
                 for ( Iterator changedPaths = changedPathsSet.iterator( ); changedPaths.hasNext( ); ) {
                     SVNLogEntryPath entryPath = ( SVNLogEntryPath ) logEntry.getChangedPaths( ).get( changedPaths.next( ) );
                     
-            		File packageFolder = new File("E:\\test\\");
+            		File packageFolder = new File(packageFolderName);
                     deleteDirectory(packageFolder);
                     packageFolder.mkdir();
                     
@@ -125,6 +125,7 @@ public class Main {
 			String username = "";
 			String password = "";
 			String svnURL = "";
+			String packageFolderName = ""; // the same as in XMLBuilder
 
 			Integer bugId = 2444; // set bug Id from svn
 
@@ -141,7 +142,7 @@ public class Main {
 	        	Integer entrylogId = getBugId(logEntry.getMessage());
 	        	if(entrylogId != null && entrylogId.equals(bugId)){
 		        	System.out.println(entrylogId);
-		        	printChanges(logEntry, repository);	        		
+		        	printChanges(logEntry, repository, packageFolderName);	        		
 	        	}
 	        }
           

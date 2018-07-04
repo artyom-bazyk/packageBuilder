@@ -54,7 +54,7 @@ public class XmlBuilder {
 
 	public static void main(String[] args) throws Exception {
 
-		File packageFolder = new File("E:\\test\\");
+		File packageFolderName = new File("E:\\test\\");
 
 		try {
 			InputStream input = Main.class.getResourceAsStream("config.properties");
@@ -70,7 +70,7 @@ public class XmlBuilder {
 		Document document = builder.newDocument();
 		Element rootElement = document.createElement("Package");
 
-		createPackageXml(packageFolder, document, rootElement);
+		createPackageXml(packageFolderName, document, rootElement);
 
 		Element version = document.createElement("version");
 		version.setTextContent("36.0");
@@ -85,7 +85,7 @@ public class XmlBuilder {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(document);
-			File packageXml = new File(packageFolder.getPath() + "\\package.xml");
+			File packageXml = new File(packageFolderName.getPath() + "\\package.xml");
 			packageXml.createNewFile();
 			StreamResult result = new StreamResult(packageXml);
 			transformer.transform(source, result);
